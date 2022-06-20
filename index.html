@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DICTIONARY API</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+<h1>DICTIONARY API</h1>
+
+<p>Write the word inside input box to see the meaning of the word.</p>
+
+<input id="inputid" type="search" onkeyup="showDefinition()">
+
+<hr>
+
+<div id="worddefinition">Word Definition</div>
+
+</div>
+
+</body>
+
+<script>
+function showDefinition() {
+const wordinput = document.getElementById("inputid").value;
+     fetch("https://api.dictionaryapi.dev/api/v2/entries/en/" + wordinput)
+.then((response) => response.json())
+.then((data) => {
+
+document.getElementById("worddefinition").innerHTML = data[0].meanings[0].definitions[0].definition;
+
+})
+
+.catch(function (error) {
+document.getElementById("worddefinition").innerHTML = "Word not found";
+
+});
+}
+</script>
+
+
+</html>
